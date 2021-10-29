@@ -8,22 +8,43 @@ function App() {
   const [list, setList] = useState([])
 
   const handleOnChange = (event) => {
-    setItem({
-      id: `${event.target.value} - ${Math.random() * 100}`,
-      text: event.target.value
-    })
+
+    if (item.id) {
+      setItem({
+        id: item.id,
+        text: event.target.value
+      })
+    } else {
+      setItem({
+        id: `${event.target.value} - ${Math.random() * 100}`,
+        text: event.target.value
+      })
+    }
+
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    setList([...list, item])
+    if (item.id) {
+      const newList = list.filter(listItem => listItem.id !== item.id)
+
+      setList([...newList, item])
+    } else {
+      setList([...list, item])
+    }
+
     setItem(initialState)
   }
 
   const handleDelete = (id) => {
     const newList = list.filter(item =>  item.id !== id)
     setList(newList)
+  }
+
+  const handleEdit = (id) => {
+    const editItem = list.find(item => item.id === id)
+    setItem(editItem)
   }
 
   return (
@@ -34,6 +55,7 @@ function App() {
             <li key={`${item.id}-${index}`}>
               <span>{item.text}</span> -
               <button onClick={() => handleDelete(item.id)}>Excluir</button>
+              <button onClick={() => handleEdit(item.id)}>Editar</button>
             </li>
           ))
         }

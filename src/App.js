@@ -54,7 +54,12 @@ function App() {
           list?.map((item, index) => (
             <li key={`${item.id}-${index}`}>
               <span>{item.text}</span> -
-              <button onClick={() => handleDelete(item.id)}>Excluir</button>
+              <button
+                onClick={() => handleDelete(item.id)}
+                data-testid={`remove-button-${index}`}
+              >
+                Excluir
+              </button>
               <button onClick={() => handleEdit(item.id)}>Editar</button>
             </li>
           ))

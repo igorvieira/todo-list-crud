@@ -33,3 +33,17 @@ test('add items to the list',  async () => {
   expect(screen.getByText(expectedValueOne)).toBeInTheDocument();
   expect(screen.getByText(expectedValueTwo)).toBeInTheDocument();
 });
+
+
+test('remove an item of the list',  async () => {
+  const screen = render(<App />);
+  const todoList = screen.getByTestId("todo-list");
+
+  expect(todoList.children.length).toBe(0);
+
+  addNewItems([expectedValueOne], screen);
+  expect(todoList.children.length).toBe(1);
+
+  fireEvent.click(screen.getByTestId('remove-button-0'));
+  expect(todoList.children.length).toBe(0);
+});

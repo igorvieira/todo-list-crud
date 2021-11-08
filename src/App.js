@@ -60,7 +60,12 @@ function App() {
               >
                 Excluir
               </button>
-              <button onClick={() => handleEdit(item.id)}>Editar</button>
+              <button
+                onClick={() => handleEdit(item.id)}
+                data-testid={`edit-button-${index}`}
+              >
+                Editar
+              </button>
             </li>
           ))
         }

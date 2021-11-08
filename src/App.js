@@ -49,7 +49,7 @@ function App() {
 
   return (
     <div>
-      <ul>
+      <ul data-testid="todo-list">
         {
           list?.map((item, index) => (
             <li key={`${item.id}-${index}`}>
@@ -66,9 +66,15 @@ function App() {
           type="text"
           name="item"
           value={item.text}
+          data-testid="input-text"
           onChange={(e) => handleOnChange(e)}
         />
-        <button onClick={handleSubmit}>Submit</button>
+        <button
+          onClick={handleSubmit}
+          data-testid="submit"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

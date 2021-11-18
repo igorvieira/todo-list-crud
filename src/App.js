@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './App.css'
 
 function App() {
 
@@ -47,45 +48,64 @@ function App() {
     setItem(editItem)
   }
 
+  const getCurrentYear = () => {
+    return new Date().getFullYear();
+  }
+
   return (
     <div>
-      <ul data-testid="todo-list">
-        {
-          list?.map((item, index) => (
-            <li key={`${item.id}-${index}`}>
-              <span>{item.text}</span> -
-              <button
-                onClick={() => handleDelete(item.id)}
-                data-testid={`remove-button-${index}`}
-              >
-                Excluir
-              </button>
-              <button
-                onClick={() => handleEdit(item.id)}
-                data-testid={`edit-button-${index}`}
-              >
-                Editar
-              </button>
-            </li>
-          ))
-        }
-      </ul>
+      <div className="content">
+        <div>
+          <div data-testid="todo-list">
+            {
+              list?.map((item, index) => (
+                <div
+                  className="content-list-item"
+                  key={`${item.id}-${index}`}>
+                  <span>{item.text}</span>
+                  <span> - </span>
+                  <span
+                    className="content-form-delete"
+                    onClick={() => handleDelete(item.id)}
+                    data-testid={`remove-button-${index}`}
+                  >
+                    Excluir
+                  </span>
+                  {' / '}
+                  <span
+                    className="content-form-edit"
+                    onClick={() => handleEdit(item.id)}
+                    data-testid={`edit-button-${index}`}
+                  >
+                    Editar
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
 
-      <form>
-        <input
-          type="text"
-          name="item"
-          value={item.text}
-          data-testid="input-text"
-          onChange={(e) => handleOnChange(e)}
-        />
-        <button
-          onClick={handleSubmit}
-          data-testid="submit"
-        >
-          Submit
-        </button>
-      </form>
+        <form className="content-form">
+          <input
+            type="text"
+            name="item"
+            value={item.text}
+            data-testid="input-text"
+            className="content-form-input"
+            onChange={(e) => handleOnChange(e)}
+          />
+          <button
+            className="content-form-button"
+            onClick={handleSubmit}
+            data-testid="submit"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <div className="footer">
+        <a className="footer-link" href="https://github.com/igorvieira/">@igorvieira</a> - <span className="footer-year">{getCurrentYear()}</span>
+      </div>
     </div>
   );
 }
